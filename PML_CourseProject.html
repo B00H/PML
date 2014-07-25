@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Summary</title>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h3>Summary</h3>
+
+<p>This report details a machine learning algorithm that was applied to a <a href="https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv">Weight Lifting Exercises Dataset</a>. Detailed information on the dataset can be found <a href="http://groupware.les.inf.puc-rio.br/har">here</a>. Briefly, six healthy males aged 20 to 28 performed one set of 10 repetitions of the Unilateral Dumbbell Biceps Curl either correctly (coded as Class A) or incorrectly (i.e., throwing the elbows to the front - coded as Class B, lifting the dumbbell only halfway - coded as Class C, lowering the dumbbell only halfway - coded as Class D), or throwing the hips to the front - coded as Class E), with sensors fitted to the forearm, arm, belt, and dumbbell. </p>
+
+<p>Computer specifics: R version 3.0.3 (2014-03-06) on darwin10.8.0 
+\newline
+Analysis date: Thu Jul 24 15:55:01 2014</p>
+
+<h3>Data Preprocessing</h3>
+
+<p>Load required  packages. </p>
+
+<pre><code class="r">library(caret); library(randomForest); library(Hmisc); library(knitr); library(markdown); library(rattle); library(rpart)
+</code></pre>
+
+<pre><code class="r">trainURL &lt;- &quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv&quot;
+testURL &lt;- &quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv&quot;
+if (!file.exists(&quot;./pml-training.csv&quot;)) {
+        download.file(trainURL, destfile = &quot;./pml_training.csv&quot;, method = &quot;curl&quot;)
+        train_download &lt;- date()
+}
+if (!file.exists(&quot;./pml-testing.csv&quot;)) {
+        download.file(testURL, destfile = &quot;./pml_testing.csv&quot;, method = &quot;curl&quot;)
+        test_download &lt;- date()
+}
+train_raw &lt;- read.csv(&quot;./pml_training.csv&quot;, na.strings = c(&quot;&quot;, &quot;NA&quot;))
+test_raw &lt;- read.csv(&quot;./pml_testing.csv&quot;)
+</code></pre>
+
+<p>The training dataset was downloaded on Thu Jul 24 15:55:16 2014, and the test dataset was downloaded on Thu Jul 24 15:55:17 2014. </p>
+
+<p>The dataset <code>train_raw</code> will be split into a training (70%) and a cross-validation testing set (30%). </p>
+
+<pre><code class="r">set.seed(34)
+in_train &lt;- createDataPartition(y = train_raw$classe, p = 0.70, list = FALSE)
+train &lt;- train_raw[in_train, ]
+crossval &lt;- train_raw[-in_train, ]
+</code></pre>
+
+<p>Exploring <code>train</code> and <code>test_raw</code> using <code>dim()</code> and <code>str()</code> (output not shown) suggests that not all 160 variables will be needed for the prediction algorithm (e.g., summary statistics, participant identifiers, timestamps) and cross-validation and subsequently removed from both <code>train</code> and <code>test_raw</code>.</p>
+
+<pre><code class="r">dim(train); str(train)
+dim(test_raw); str(test_raw)
+remove &lt;- grep(&quot;X|user_name|raw_timestamp_part_1|raw_timestamp_part_2|cvtd_timestamp|new_window|num_window|^kurtosis|^skewness|^max|^min|^amplitude|^var|^avg|^stddev&quot;, names(train))
+train_less &lt;- train[,-remove]
+crossval_less &lt;- crossval[, -remove]
+test_less &lt;- test_raw[, -remove]
+</code></pre>
+
+<p>Checking correlations between the <code>train_less</code> variables (minus the <code>classe</code> variable, as this is what the algorithm should predict) suggests highly intercorrelated variables.</p>
+
+<pre><code class="r">corrcheck &lt;- abs(cor(train_less[, -53])); diag(corrcheck) &lt;- 0; which(corrcheck &gt; .80, arr.ind = TRUE)
+</code></pre>
+
+<pre><code>##                  row col
+## yaw_belt           3   1
+## total_accel_belt   4   1
+## accel_belt_y       9   1
+## accel_belt_z      10   1
+## accel_belt_x       8   2
+## magnet_belt_x     11   2
+## roll_belt          1   3
+## roll_belt          1   4
+## accel_belt_y       9   4
+## accel_belt_z      10   4
+## pitch_belt         2   8
+## magnet_belt_x     11   8
+## roll_belt          1   9
+## total_accel_belt   4   9
+## accel_belt_z      10   9
+## roll_belt          1  10
+## total_accel_belt   4  10
+## accel_belt_y       9  10
+## pitch_belt         2  11
+## accel_belt_x       8  11
+## gyros_arm_y       19  18
+## gyros_arm_x       18  19
+## magnet_arm_x      24  21
+## accel_arm_x       21  24
+## magnet_arm_z      26  25
+## magnet_arm_y      25  26
+## accel_dumbbell_x  34  28
+## accel_dumbbell_z  36  29
+## gyros_dumbbell_z  33  31
+## gyros_forearm_z   46  31
+## gyros_dumbbell_x  31  33
+## gyros_forearm_z   46  33
+## pitch_dumbbell    28  34
+## yaw_dumbbell      29  36
+## gyros_forearm_z   46  45
+## gyros_dumbbell_x  31  46
+## gyros_dumbbell_z  33  46
+## gyros_forearm_y   45  46
+</code></pre>
+
+<p>Plotting distribution of all <code>train_less</code> variables (minus the <code>classe</code> variable, as this is what the algorithm should predict) suggests non-normal distributions for the majority of predictors (output not shown). </p>
+
+<pre><code class="r">hist.data.frame(train_less[, -53])
+</code></pre>
+
+<p>Thus, an algorithm that does not assume linearity and independence of predictors is warranted. </p>
+
+<h3>Model fit</h3>
+
+<p>The algorithm used here is random forest, as it is one of the best machine learning algorithms in terms of accuracy. It also provides details regarding importance of variables, with literally not risk of overfitting. In contrast to other classification tree algorithms (e.g.,<code>rpart</code>), there is no need for pruning. The model parameters will be as follows: ntrees = 5000 (as a larger number guarantees more stable and robust results), mtry = 8 (square of the number of variables, rounded up - see <a href="http://web.stanford.edu/%7Estephsus/R-randomforest-guide.pdf">here</a> for reference). </p>
+
+<pre><code class="r">set.seed(1234)
+model_rf &lt;- randomForest(train_less$classe ~., data=train_less, ntree=2500, mtry=8)
+model_rf
+</code></pre>
+
+<pre><code>## 
+## Call:
+##  randomForest(formula = train_less$classe ~ ., data = train_less,      ntree = 2500, mtry = 8) 
+##                Type of random forest: classification
+##                      Number of trees: 2500
+## No. of variables tried at each split: 8
+## 
+##         OOB estimate of  error rate: 0.49%
+## Confusion matrix:
+##      A    B    C    D    E class.error
+## A 3902    4    0    0    0    0.001024
+## B   13 2639    6    0    0    0.007148
+## C    0   16 2378    2    0    0.007513
+## D    0    0   18 2233    1    0.008437
+## E    0    0    2    5 2518    0.002772
+</code></pre>
+
+<p>The out-of-bag error is 0.5%, and the confusion matrix suggests that the model fit the <code>train_less</code> data very well. This also means that for cross-validation, the expected out-of-sample error should be very low. </p>
+
+<p>Calculate variable importance and print in order of importance (highest first). </p>
+
+<pre><code class="r">model_rf_varimp &lt;- varImp(model_rf)
+model_rf_varimp$variable &lt;- row.names(model_rf_varimp)
+model_rf_varimp[order(model_rf_varimp$Overall, decreasing = TRUE), ]
+</code></pre>
+
+<pre><code>##                      Overall             variable
+## roll_belt             899.16            roll_belt
+## yaw_belt              644.32             yaw_belt
+## pitch_forearm         569.84        pitch_forearm
+## magnet_dumbbell_z     546.77    magnet_dumbbell_z
+## pitch_belt            505.14           pitch_belt
+## magnet_dumbbell_y     480.07    magnet_dumbbell_y
+## roll_forearm          461.67         roll_forearm
+## magnet_dumbbell_x     335.96    magnet_dumbbell_x
+## roll_dumbbell         297.10        roll_dumbbell
+## accel_dumbbell_y      292.72     accel_dumbbell_y
+## magnet_belt_z         276.39        magnet_belt_z
+## accel_belt_z          271.96         accel_belt_z
+## magnet_belt_y         265.28        magnet_belt_y
+## accel_dumbbell_z      229.95     accel_dumbbell_z
+## accel_forearm_x       228.07      accel_forearm_x
+## gyros_belt_z          208.69         gyros_belt_z
+## roll_arm              206.74             roll_arm
+## magnet_forearm_z      205.26     magnet_forearm_z
+## total_accel_dumbbell  188.94 total_accel_dumbbell
+## magnet_arm_x          175.90         magnet_arm_x
+## magnet_belt_x         173.76        magnet_belt_x
+## yaw_dumbbell          173.74         yaw_dumbbell
+## accel_dumbbell_x      171.81     accel_dumbbell_x
+## gyros_dumbbell_y      168.13     gyros_dumbbell_y
+## accel_forearm_z       167.15      accel_forearm_z
+## yaw_arm               160.43              yaw_arm
+## magnet_arm_y          159.16         magnet_arm_y
+## magnet_forearm_y      157.76     magnet_forearm_y
+## accel_arm_x           156.29          accel_arm_x
+## magnet_forearm_x      149.82     magnet_forearm_x
+## total_accel_belt      140.79     total_accel_belt
+## magnet_arm_z          126.14         magnet_arm_z
+## yaw_forearm           120.12          yaw_forearm
+## pitch_arm             119.85            pitch_arm
+## pitch_dumbbell        119.76       pitch_dumbbell
+## accel_arm_y           108.33          accel_arm_y
+## accel_forearm_y        96.27      accel_forearm_y
+## gyros_arm_y            95.94          gyros_arm_y
+## gyros_arm_x            92.68          gyros_arm_x
+## accel_arm_z            89.76          accel_arm_z
+## gyros_dumbbell_x       84.71     gyros_dumbbell_x
+## accel_belt_y           83.94         accel_belt_y
+## gyros_forearm_y        83.17      gyros_forearm_y
+## accel_belt_x           79.60         accel_belt_x
+## gyros_belt_y           78.31         gyros_belt_y
+## total_accel_forearm    77.23  total_accel_forearm
+## total_accel_arm        70.62      total_accel_arm
+## gyros_belt_x           64.14         gyros_belt_x
+## gyros_forearm_z        55.40      gyros_forearm_z
+## gyros_dumbbell_z       54.69     gyros_dumbbell_z
+## gyros_forearm_x        51.01      gyros_forearm_x
+## gyros_arm_z            39.82          gyros_arm_z
+</code></pre>
+
+<p>Cross-validate on <code>crossval_less</code> and calculate accuracy and out-of-sample error respectively.</p>
+
+<pre><code class="r">cv &lt;- table(actual = crossval_less$classe, predicted = predict(model_rf, newdata = crossval_less, type = &quot;class&quot;))
+acc &lt;- sum(diag(cv))/sum(cv)
+oos &lt;- 1-acc
+oos
+</code></pre>
+
+<pre><code>## [1] 0.006457
+</code></pre>
+
+<p>The prediction accuracy of the model on the cross-validation dataset <code>crossval_less</code> is almost 100%, with a very lowout-of-sample error of 0.0065. </p>
+
+<pre><code class="r">answers &lt;- as.character(predict(model_rf, newdata = test_less, type = &quot;class&quot;))
+pml_write_files &lt;- function(x){
+    n &lt;- length(x)
+    for (i in 1:n) {
+        filename &lt;- paste0(&quot;problem_id_&quot;, i, &quot;.txt&quot;)
+        write.table(x[i], file = filename, quote = FALSE, row.names = FALSE, col.names = FALSE)
+    }
+}
+pml_write_files(answers)
+</code></pre>
+
+<h3>Conclusion</h3>
+
+<p>As expected, the random forest algorithm performed very well, with a cross-validation prediction accuracy of almost 100%. </p>
+
+</body>
+
+</html>

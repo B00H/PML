@@ -1,0 +1,119 @@
+---
+title: 'Human Activity Recognition: Predicting exercise style in humans'
+output: html_document
+---
+```{r compspecs, echo=FALSE, message=FALSE, cache=TRUE}
+r_version <- R.version$version.string
+platform <- R.version$os
+analysis_date <- date()
+options(digits = 2)
+```
+
+### Summary
+This report details a machine learning algorithm that was applied to a [Weight Lifting Exercises Dataset](https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv). Detailed information on the dataset can be found [here](http://groupware.les.inf.puc-rio.br/har). Briefly, six healthy males aged 20 to 28 performed one set of 10 repetitions of the Unilateral Dumbbell Biceps Curl either correctly (coded as Class A) or incorrectly (i.e., throwing the elbows to the front - coded as Class B, lifting the dumbbell only halfway - coded as Class C, lowering the dumbbell only halfway - coded as Class D), or throwing the hips to the front - coded as Class E), with sensors fitted to the forearm, arm, belt, and dumbbell. 
+
+Computer specifics: `r r_version` on `r platform` 
+\newline
+Analysis date: `r analysis_date`
+
+### Data Preprocessing
+Load required  packages. 
+```{r lib_load, cache=TRUE, echo=TRUE, message=FALSE}
+library(caret); library(randomForest); library(Hmisc); library(knitr); library(markdown); library(rattle); library(rpart)
+```
+
+```{r dat_get, cache=TRUE, echo=TRUE, message=FALSE}
+trainURL <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
+testURL <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
+if (!file.exists("./pml-training.csv")) {
+        download.file(trainURL, destfile = "./pml_training.csv", method = "curl")
+        train_download <- date()
+}
+if (!file.exists("./pml-testing.csv")) {
+        download.file(testURL, destfile = "./pml_testing.csv", method = "curl")
+        test_download <- date()
+}
+train_raw <- read.csv("./pml_training.csv", na.strings = c("", "NA"))
+test_raw <- read.csv("./pml_testing.csv")
+```
+
+The training dataset was downloaded on `r train_download`, and the test dataset was downloaded on `r test_download`. 
+
+The dataset `train_raw` will be split into a training (70%) and a cross-validation testing set (30%). 
+
+```{r split, cache=TRUE, message=FALSE}
+set.seed(34)
+in_train <- createDataPartition(y = train_raw$classe, p = 0.70, list = FALSE)
+train <- train_raw[in_train, ]
+crossval <- train_raw[-in_train, ]
+```
+
+Exploring `train` and `test_raw` using `dim()` and `str()` (output not shown) suggests that not all `r dim(train)[[2]]` variables will be needed for the prediction algorithm (e.g., summary statistics, participant identifiers, timestamps) and cross-validation and subsequently removed from both `train` and `test_raw`.
+
+```{r trainexplo, cache=TRUE, message=FALSE, results="hide"}
+dim(train); str(train)
+dim(test_raw); str(test_raw)
+remove <- grep("X|user_name|raw_timestamp_part_1|raw_timestamp_part_2|cvtd_timestamp|new_window|num_window|^kurtosis|^skewness|^max|^min|^amplitude|^var|^avg|^stddev", names(train))
+train_less <- train[,-remove]
+crossval_less <- crossval[, -remove]
+test_less <- test_raw[, -remove]
+```
+
+Checking correlations between the `train_less` variables (minus the `classe` variable, as this is what the algorithm should predict) suggests highly intercorrelated variables.
+
+```{r corrcheck, cache=TRUE, message=FALSE}
+corrcheck <- abs(cor(train_less[, -53])); diag(corrcheck) <- 0; which(corrcheck > .80, arr.ind = TRUE)
+```
+
+Plotting distribution of all `train_less` variables (minus the `classe` variable, as this is what the algorithm should predict) suggests non-normal distributions for the majority of predictors (output not shown). 
+
+```{r distrcheck, cache=TRUE, message=FALSE, results="hide", eval = FALSE}
+hist.data.frame(train_less[, -53])
+```
+
+Thus, an algorithm that does not assume linearity and independence of predictors is warranted. 
+
+### Model fit
+The algorithm used here is random forest, as it is one of the best machine learning algorithms in terms of accuracy. It also provides details regarding importance of variables, with literally not risk of overfitting. In contrast to other classification tree algorithms (e.g.,`rpart`), there is no need for pruning. The model parameters will be as follows: ntrees = 5000 (as a larger number guarantees more stable and robust results), mtry = 8 (square of the number of variables, rounded up - see [here](http://web.stanford.edu/~stephsus/R-randomforest-guide.pdf) for reference). 
+
+```{r rffit, cache=TRUE, message=FALSE}
+set.seed(1234)
+model_rf <- randomForest(train_less$classe ~., data=train_less, ntree=2500, mtry=8)
+model_rf
+```
+
+The out-of-bag error is 0.5%, and the confusion matrix suggests that the model fit the `train_less` data very well. This also means that for cross-validation, the expected out-of-sample error should be very low. 
+
+Calculate variable importance and print in order of importance (highest first). 
+ 
+```{r rfvarimp, cache=TRUE, message=FALSE}
+model_rf_varimp <- varImp(model_rf)
+model_rf_varimp$variable <- row.names(model_rf_varimp)
+model_rf_varimp[order(model_rf_varimp$Overall, decreasing = TRUE), ]
+```
+
+Cross-validate on `crossval_less` and calculate accuracy and out-of-sample error respectively.
+
+```{r rfcv, echo=FALSE, cache=TRUE, message=FALSE}
+cv <- table(actual = crossval_less$classe, predicted = predict(model_rf, newdata = crossval_less, type = "class"))
+acc <- sum(diag(cv))/sum(cv)
+oos <- 1-acc
+oos
+```
+
+The prediction accuracy of the model on the cross-validation dataset `crossval_less` is almost 100%, with a very lowout-of-sample error of `r oos`. 
+
+```{r test, cache=TRUE, message=FALSE, results="hide", echo="FALSE"}
+answers <- as.character(predict(model_rf, newdata = test_less, type = "class"))
+pml_write_files <- function(x){
+	n <- length(x)
+	for (i in 1:n) {
+		filename <- paste0("problem_id_", i, ".txt")
+		write.table(x[i], file = filename, quote = FALSE, row.names = FALSE, col.names = FALSE)
+	}
+}
+pml_write_files(answers)
+```
+
+### Conclusion
+As expected, the random forest algorithm performed very well, with a cross-validation prediction accuracy of almost 100%. 
