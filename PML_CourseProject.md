@@ -3,21 +3,24 @@ title: 'Human Activity Recognition: Predicting exercise style in humans'
 output: html_document
 ---
 
+## Human Activity Recognition: Predicting exercise style in humans
 
 ### Summary
 This report details a machine learning algorithm that was applied to a [Weight Lifting Exercises Dataset](https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv). Detailed information on the dataset can be found [here](http://groupware.les.inf.puc-rio.br/har). Briefly, six healthy males aged 20 to 28 performed one set of 10 repetitions of the Unilateral Dumbbell Biceps Curl either correctly (coded as Class A) or incorrectly (i.e., throwing the elbows to the front - coded as Class B, lifting the dumbbell only halfway - coded as Class C, lowering the dumbbell only halfway - coded as Class D), or throwing the hips to the front - coded as Class E), with sensors fitted to the forearm, arm, belt, and dumbbell. 
 
 Computer specifics: R version 3.0.3 (2014-03-06) on darwin10.8.0 
-\newline
+
 Analysis date: Thu Jul 24 15:55:01 2014
 
 ### Data Preprocessing
 Load required  packages. 
 
 ```r
-library(caret); library(randomForest); library(Hmisc); library(knitr); library(markdown); library(rattle); library(rpart)
+library(caret); library(randomForest); library(Hmisc); library(knitr); library(markdown)
 ```
 
+
+Get the data. 
 
 ```r
 trainURL <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
@@ -117,7 +120,7 @@ hist.data.frame(train_less[, -53])
 Thus, an algorithm that does not assume linearity and independence of predictors is warranted. 
 
 ### Model fit
-The algorithm used here is random forest, as it is one of the best machine learning algorithms in terms of accuracy. It also provides details regarding importance of variables, with literally not risk of overfitting. In contrast to other classification tree algorithms (e.g.,`rpart`), there is no need for pruning. The model parameters will be as follows: ntrees = 5000 (as a larger number guarantees more stable and robust results), mtry = 8 (square of the number of variables, rounded up - see [here](http://web.stanford.edu/~stephsus/R-randomforest-guide.pdf) for reference). 
+The algorithm used here is random forest, as it is one of the best machine learning algorithms in terms of accuracy. It also provides details regarding importance of variables, with literally no risk of overfitting. In contrast to other classification tree algorithms (e.g.,`rpart`), there is no need for pruning. The model parameters will be as follows: ntrees = 2500 (as a larger number guarantees more stable and robust results), mtry = 8 (square of the number of variables, rounded up - see [here](http://web.stanford.edu/~stephsus/R-randomforest-guide.pdf) for reference). 
 
 
 ```r
@@ -144,7 +147,7 @@ model_rf
 ## E    0    0    2    5 2518    0.002772
 ```
 
-The out-of-bag error is 0.5%, and the confusion matrix suggests that the model fit the `train_less` data very well. This also means that for cross-validation, the expected out-of-sample error should be very low. 
+The out-of-bag error is 0.49%, and the confusion matrix suggests that the model fit the `train_less` data very well. This also means that for cross-validation, the expected out-of-sample error should be very low. 
 
 Calculate variable importance and print in order of importance (highest first). 
  
@@ -210,7 +213,7 @@ model_rf_varimp[order(model_rf_varimp$Overall, decreasing = TRUE), ]
 ## gyros_forearm_x        51.01      gyros_forearm_x
 ## gyros_arm_z            39.82          gyros_arm_z
 ```
-
+### Cross-validation
 Cross-validate on `crossval_less` and calculate accuracy and out-of-sample error respectively.
 
 
@@ -226,19 +229,6 @@ oos
 ```
 
 The prediction accuracy of the model on the cross-validation dataset `crossval_less` is almost 100%, with a very lowout-of-sample error of 0.0065. 
-
-
-```r
-answers <- as.character(predict(model_rf, newdata = test_less, type = "class"))
-pml_write_files <- function(x){
-	n <- length(x)
-	for (i in 1:n) {
-		filename <- paste0("problem_id_", i, ".txt")
-		write.table(x[i], file = filename, quote = FALSE, row.names = FALSE, col.names = FALSE)
-	}
-}
-pml_write_files(answers)
-```
 
 ### Conclusion
 As expected, the random forest algorithm performed very well, with a cross-validation prediction accuracy of almost 100%. 
